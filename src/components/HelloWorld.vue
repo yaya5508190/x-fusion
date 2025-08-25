@@ -9,7 +9,7 @@
 
       <div class="mb-8 text-center">
         <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
-        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
+        <h1 class="text-h2 font-weight-bold" @click="fetchMessage">{{ title }}</h1>
       </div>
 
       <v-row>
@@ -87,4 +87,10 @@
       title: 'Community',
     },
   ]
+
+  const title = ref('Vuetify')
+  const fetchMessage = async () => {
+    const { data } = await axiosInstance.get('/hello')
+    title.value = data.message
+  }
 </script>

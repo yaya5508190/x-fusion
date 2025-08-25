@@ -24,7 +24,8 @@ export default defineConfig({
         'vue',
         VueRouterAutoImports,
         {
-          pinia: ['defineStore', 'storeToRefs'],
+          'pinia': ['defineStore', 'storeToRefs'],
+          '@/plugins/axios.ts': ['axiosInstance'],
         },
       ],
       dts: 'src/auto-imports.d.ts',

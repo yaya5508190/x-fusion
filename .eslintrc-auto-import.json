@@ -17,6 +17,7 @@
     "Slots": true,
     "VNode": true,
     "WritableComputedRef": true,
+    "axiosInstance": true,
     "computed": true,
     "createApp": true,
     "customRef": true,
