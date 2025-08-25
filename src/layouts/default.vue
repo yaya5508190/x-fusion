@@ -39,6 +39,12 @@
 
       <!--      <v-app-bar-title>Application Bar</v-app-bar-title>-->
       <template #append>
+        <toggle-icon-button
+          density="compact"
+          :icons="['mdi-weather-night', 'mdi-white-balance-sunny']"
+          style="margin: 1em;"
+          @click="theme.toggle()"
+        />
         <v-text-field
           append-inner-icon="mdi-magnify"
           density="compact"
@@ -58,5 +64,9 @@
 </template>
 
 <script lang="ts" setup>
+  import { useTheme } from 'vuetify'
+  import '@/styles/global.scss'
+
   const rail = ref(false)
+  const theme = useTheme()
 </script>
