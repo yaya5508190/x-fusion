@@ -1,19 +1,24 @@
 import type { ModuleFederation } from '@module-federation/runtime-core'
+import type { MFConfig } from '@/types/module-federation.ts'
 import { loadRemote, registerRemotes } from '@module-federation/runtime'
+import { useModuleFederation } from '@/stores/module-federation.ts'
 
-async function ensureRemotes (): Promise<ReturnType<ModuleFederation['registerRemotes']>> {
+export async function ensureRemotes (): Promise<ReturnType<ModuleFederation['registerRemotes']>> {
   // [
   //   { alias: 'viteViteRemote', name: 'viteViteRemote', entry: 'http://localhost:3001/mf-manifest.json' },
   //   { alias:'vueViteRemote', name:'vueViteRemote', entry:'http://localhost:5174/remoteEntry.js' }
   // ]
-  const { data } = await axiosInstance.get<{ remotes: Parameters<ModuleFederation['registerRemotes']>[0] }>('/module-federation')
+  const { data } = await axiosInstance.get<MFConfig>('/module-federation')
   console.debug(data)
+  // 动态注册到路由
+
+  // 保存配置到 pinia
+  useModuleFederation().setMfConfig(data)
   return registerRemotes(data.remotes)
 }
 
 /** 动态加载远程模块（返回其默认导出或模块本体） */
 export async function loadRemoteComponent<T = any> (spec: string): Promise<T> {
-  await ensureRemotes()
   const component = await loadRemote(spec)
   try { /* @ts-ignore */
     console.debug('[MF] keys:', Object.keys(component))

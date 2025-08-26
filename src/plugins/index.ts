@@ -6,17 +6,21 @@
 
 // Types
 import type { App } from 'vue'
-import router from '../router'
-import pinia from '../stores'
+import { ensureRemotes } from '@/plugins/module-federation.ts'
+import router, { mountPluginRoutes } from '../router'
 
+import pinia from '../stores'
 import axios from './axios'
 // Plugins
 import vuetify from './vuetify'
 
-export function registerPlugins (app: App) {
+export async function registerPlugins (app: App) {
   app
     .use(vuetify)
     .use(router)
     .use(pinia)
     .use(axios)
+
+  await ensureRemotes()
+  mountPluginRoutes()
 }

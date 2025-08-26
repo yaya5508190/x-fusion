@@ -15,19 +15,12 @@
 
       <v-list density="compact" nav>
         <v-list-item
+          v-for="menu in mfConfig.menus"
+          :key="menu.name"
           prepend-icon="mdi-home-city"
-          title="Home"
-          value="home"
-        />
-        <v-list-item
-          prepend-icon="mdi-account"
-          title="My Account"
-          value="account"
-        />
-        <v-list-item
-          prepend-icon="mdi-account-group-outline"
-          title="Users"
-          value="users"
+          :title="menu.name"
+          :value="menu.name"
+          @click="$router.push(menu.path)"
         />
       </v-list>
     </v-navigation-drawer>
@@ -65,8 +58,11 @@
 
 <script lang="ts" setup>
   import { useTheme } from 'vuetify'
+  import { useModuleFederation } from '@/stores/module-federation.ts'
   import '@/styles/global.scss'
 
   const rail = ref(false)
   const theme = useTheme()
+
+  const mfConfig = useModuleFederation().mfConfig
 </script>
