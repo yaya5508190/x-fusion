@@ -12,12 +12,12 @@ import { registerPlugins } from '@/plugins'
 
 // Components
 import App from './App.vue'
-
 // Styles
 import 'unfonts.css'
 
 if (import.meta.env.DEV) {
-  import('@/mock')
+  const { setupMocks } = await import('@/mock')
+  await setupMocks() // 关键：等待 mock 完全就绪
 }
 
 const app = createApp(App)
