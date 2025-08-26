@@ -10,8 +10,6 @@ export async function ensureRemotes (): Promise<ReturnType<ModuleFederation['reg
   // ]
   const { data } = await axiosInstance.get<MFConfig>('/module-federation')
   console.debug(data)
-  // 动态注册到路由
-
   // 保存配置到 pinia
   useModuleFederation().setMfConfig(data)
   return registerRemotes(data.remotes)

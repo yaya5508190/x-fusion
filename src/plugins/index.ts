@@ -17,10 +17,11 @@ import vuetify from './vuetify'
 export async function registerPlugins (app: App) {
   app
     .use(vuetify)
-    .use(router)
     .use(pinia)
     .use(axios)
 
   await ensureRemotes()
   mountPluginRoutes()
+
+  app.use(router)
 }

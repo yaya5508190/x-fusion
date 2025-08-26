@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { loadRemoteComponent } from '@/plugins/module-federation.ts'
+  import vuetify from '@/plugins/vuetify.ts'
 
   const container = ref<HTMLElement | null>(null)
 
@@ -12,7 +13,7 @@
 
   onMounted(async () => {
     const remote = await loadRemoteComponent<{ mount: Function, unmount?: Function }>(props.pluginName)
-    remote.mount(container.value!, { /* 传给 RemoteRoot 的 props（可选） */ })
+    remote.mount(container.value!, { vuetify })
   })
 
   onBeforeUnmount(async () => {

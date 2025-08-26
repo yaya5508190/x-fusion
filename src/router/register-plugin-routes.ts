@@ -12,15 +12,17 @@ import { useModuleFederation } from '@/stores/module-federation.ts'
  */
 export function registerPluginRoutes (router: Router) {
   const app = useModuleFederation()
-
+  console.log('注册微前端路由', app.mfConfig.menus)
   for (const menu of app.mfConfig.menus) {
+    console.log(menu)
     // 生成稳定的路由名：plugin-<name> 或基于 path
-    const routeName = `plugin-${menu.component}`
+    const routeName = `plugin-${menu.path}`
 
     if (router.hasRoute(routeName)) {
       continue
     }
 
+    console.log(router.getRoutes())
     router.addRoute(setupLayouts([{
       name: routeName,
       path: menu.path,
@@ -36,6 +38,6 @@ export function registerPluginRoutes (router: Router) {
       },
     }])[0])
 
-    console.log(setupLayouts(router.getRoutes()))
+    console.log(router.getRoutes())
   }
 }
