@@ -61,8 +61,11 @@ export default defineConfig({
       },
     }),
     federation({
-      name: 'viteViteHost',
+      name: 'x-fusion',
       filename: 'remoteEntry.js',
+      exposes: {
+        './App': './src/App.vue',
+      },
       manifest: true,
       shared: {
         vue: { singleton: true, requiredVersion: '^3.4.0' },
@@ -105,5 +108,11 @@ export default defineConfig({
         api: 'modern-compiler',
       },
     },
+  },
+  base: './',
+  build: {
+    target: 'esnext',
+    outDir: 'dist',
+    assetsDir: '', // 👈 静态资源直接输出在 dist 根目录
   },
 })

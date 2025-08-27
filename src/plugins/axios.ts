@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: './api',
   timeout: 5000,
 })
 
