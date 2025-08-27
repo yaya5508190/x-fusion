@@ -15,6 +15,12 @@
 
       <v-list density="compact" nav>
         <v-list-item
+          prepend-icon="mdi-home-city"
+          title="首页"
+          value="首页"
+          @click="$router.push('/')"
+        />
+        <v-list-item
           v-for="menu in mfConfig.menus"
           :key="menu.name"
           prepend-icon="mdi-home-city"

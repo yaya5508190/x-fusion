@@ -13,7 +13,7 @@
 
   onMounted(async () => {
     const remote = await loadRemoteComponent<{ mount: Function, unmount?: Function }>(props.pluginName)
-    remote.mount(container.value!, { vuetify })
+    remote.mount(container.value!, {}, vuetify)
   })
 
   onBeforeUnmount(async () => {
